@@ -1,0 +1,9 @@
+[book]
+title = "JavaScript Notes"
+authors = ["Pratham Mehta"]
+language = "en"
+multilingual = false
+src = "src"
+
+[build]
+build-dir = "book"
