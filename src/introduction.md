@@ -10,14 +10,98 @@ In this, we are going to study JavaScript Fundamentals, which can be useful to s
 - .NET
 
 ## Index
+1. Getting Started:
+   - [What is JavaScript?]()
+   - [Setting up the Environment]()
+   - [JavaScript in Browsers]()
+   - [Separation of Concerns ]()
+   - [JavaScript in Node ]()
 
-| Section Topic                            | Subsection                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1. [Getting Started](#javascript)        | - [What is JavaScript?](#what-is-javascript?) <br>- [Setting up the Environment](#setting-up-the-javascript-environment) <br>- [JavaScript in Browsers](#javascript-in-browsers) <br>- [Separation of Concerns](#separation-of-concerns) <br>- [JavaScript in Node](#javascript-in-the-node) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| 2. [Basics](#variables)                  | - [Variables](#variables) <br>- [Constants](#constants) <br>- [Primitive Types](#primitive-types) <br>- [Dynamic Typing](#dynamic-typing) <br>- [Objects](#objects) <br>- [Arrays](#arrays) <br>- [Functions](#functions) <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| 3. [Operators](#operators-in-javascript) | - [JavaScript Operators](#1-javascript-operators) <br>- [Arithmetic Operators](#arithmetic-operators) <br>- [Assignment Operators](#assignment-operators) <br>- [Comparision Operators](#comparison-operators-in-javascript) <br>- [Equality Operators](#equality-operators-in-javascript) <br>- [Ternary Operators](#ternary-operator-in-javascript) <br>- [Logical Operators](#logical-operators-with-in-javascript) <br>- [Logical Operators with Non-booleans](#logical-operators-with-non-booleans)<br>- [Bitwise Operators](#bitwise-operators-in-javascript) <br>- [Access Control Systems using Bitwise Operators](#access-control-system)<br>- [Operator Precedence](#operator-precedence-in-javascript) <br>- [Quiz & Exercises](#quiz-on-js-operators) <br>- [Programming Exercise](#programming-execise-1---swapping-variables) <br> |
-| 4. Control Flow                          | - If...Else <br>- Switch...case <br>- For <br>- While <br>- Do...While <br>- Infinite Loops <br>- For...In <br>- For...of <br>- Break and Continue <br>- Max of Two numbers <br>- Exercises <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| 5. Objects                               | - Basics <br>- Factory Functions <br>- Constructor Functions <br>- Dynamic Nature of Objects <br>-  Constructor Property <br>- Functions are Objects <br>- Value vs. Reference Types <br>- Enumerating Properties of an Object <br>- Cloning an Object <br>- Garbage Collection <br>- Math <br>- String <br>- Template Literals <br>- Date <br>- Exercises <br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| 6. Arrays                                | - Introduction <br>- Adding Elements <br>- Finding Elements (Primitives) <br>- Finding Elements (Reference Types)<br>- Arrow Functions <br>- Removing Elements <br>- Emptying an Array <br>- Combining and Slicing Arrays <br>- The Spread Operator <br>- Iterating an Array <br>- Joining an Array <br>- Sorting an Array <br>- Testing the elements of an Array <br>- Flitering an Array <br>- Mapping an Array <br>- Reducing an Array <br>- Exercises                                                                                                                                                                                                                                                                                                                                                                                        |
-| 7. Functions                             | - Function Declaration vs. Expressions <br>- Hoisting <br>- Arguments <br>- The Rest Operator <br>- Default Parameters <br>- Getters and Setters <br>- Try and Catch <br>- Local vs Global Scope <br>- Let vs Var <br>- The `this` keyword<br>- Changing `this` <br>- Exercises                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+2. Basics
+   - [Variables]()
+   - [Constants]()
+   - [Primitive Types]()
+   - [Dynamic Typing]()
+   - [Objects]()
+   - [Arrays]()
+   - [Functions]()
+
+3. Operators
+   - [JavaScript Operators]()
+   - [Arithmetic Operators]()
+   - [Assignment Operators]()
+   - [Comparision Operators]()
+   - [Equality Operators]()
+   - [Ternary Operators]()
+   - [Logical Operators ]()
+   - [Logical Operators with Non-booleans]()
+   - [Bitwise Operators]()
+   - [Access Control Systems using Bitwise Operators]()
+   - [Operator Precedence]()
+   - [Quiz & Exercises]()
+   - [Programming Exercise ]()
+
+4. Control Flow
+   - [If...Else]()
+   - [Switch...case]()
+   - [For]()
+   - [While]()
+   - [Do...While]()
+   - [Infinite Loops]()
+   - [For...In]()
+   - [For...of]()
+   - [Break and Continue]()
+   - [Max of Two numbers]()
+   - [Exercises]()
+
+5. Objects
+   - [Basics]()
+   - [Factory Functions]()
+   - [Constructor Functions]()
+   - [Dynamic Nature of Objects]()
+   - [ Constructor Property]()
+   - [Functions are Objects]()
+   - [Value vs. Reference Types]()
+   - [Enumerating Properties of an Object]()
+   - [Cloning an Object]()
+   - [Garbage Collection]()
+   - [Math]()
+   - [String]()
+   - [Template Literals]()
+   - [Date]()
+   - [Exercises]()
+
+6. Arrays
+   - [Introduction]()
+   - [Adding Elements]()
+   - [Finding Elements (Primitives) ]()
+   - [Finding Elements (Reference Types)]()
+   - [Arrow Functions]()
+   - [Removing Elements]()
+   - [Emptying an Array]()
+   - [Combining and Slicing Arrays]()
+   - [The Spread Operator]()
+   - [Iterating an Array]()
+   - [Joining an Array]()
+   - [Sorting an Array]()
+   - [Testing the elements of an Array]()
+   - [Flitering an Array]()
+   - [Mapping an Array]()
+   - [Reducing an Array]()
+   - [Exercises]()
+
+7. Functions
+   - [Function Declaration vs. Expressions]()
+   - [Hoisting]()
+   - [Arguments]()
+   - [The Rest Operator]()
+   - [Default Parameters]()
+   - [Getters and Setters]()
+   - [Try and Catch]()
+   - [Local vs Global Scope]()
+   - [Let vs Var]()
+   - [The this keyword]()
+   - [Changing this ]()
+   - [Exercises]()
+
 
