@@ -4,24 +4,24 @@
 
 # Getting Started
 
-- [What is JavaScript?]()
-- [Setting up the Environment]()
-- [JavaScript in Browsers]()
-- [Separation of Concerns ]()
-- [JavaScript in Node ]()
+- [What is JavaScript?](./getting-started/whatisjs.md)
+- [Setting up the Environment](./getting-started/setupenv.md)
+- [JavaScript in Browsers](./getting-started/jsinbrow.md)
+- [Separation of Concerns ](./getting-started/separationofconcerns.md)
+- [JavaScript in Node ](./getting-started/jsinnode.md)
 
 # Basics
 
-- [Variables]()
-- [Constants]()
-- [Primitive Types]()
-- [Dynamic Typing]()
-- [Objects]()
-- [Arrays]()
-- [Functions]()
+- [Variables](./basics/variables.md)
+- [Constants](./basics/constants.md)
+- [Primitive Types](./basics/primitive.md)
+- [Dynamic Typing](./basics/dynamic.md)
+- [Objects](./basics/objects.md)
+- [Arrays](./basics/arrays.md)
+- [Functions](./basics/functions.md)
 
 # Operators
-- [JavaScript Operators]()
+- [JavaScript Operators](./operators/jsoperators.md)
 - [Arithmetic Operators]()
 - [Assignment Operators]()
 - [Comparision Operators]()
