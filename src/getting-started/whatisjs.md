@@ -39,7 +39,7 @@ In this introduction, we are going to understand the four frequently asked quest
 
 - For example, the JavaScript engines in Firefox and Chrome are SpiderMonkey and V8.
 
-<img src="../images//images/2024-07-11-19-25-33-image.png" title="" alt="" width="277">
+<img src="../images/2024-07-11-19-25-33-image.png" title="" alt="" width="277">
 
 - In 2009, a very clever engineer called Brian Doll took the open source JavaScript engine in Chrome, and embedded it inside a C++ program. He called that program Node.
 
