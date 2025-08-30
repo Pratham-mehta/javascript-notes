@@ -9,7 +9,6 @@ src = "src"
 build-dir = "book"
 
 [preprocessor.tts]
-command = "mdbook-tts"
 
 [output.html]
 additional-js = ["tts.js"]
