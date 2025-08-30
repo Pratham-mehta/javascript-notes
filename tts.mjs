@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Premium Text-to-Speech for mdBook
 // Beautiful UI with working settings and smart voice selection
 
@@ -384,37 +383,52 @@ class mdBookTTS {
 
             .tts-drag-handle {
                 position: absolute;
-                top: -5px;
-                right: -5px;
-                width: 20px;
-                height: 20px;
-                background: rgba(255, 255, 255, 0.9);
+                top: -8px;
+                right: -8px;
+                width: 24px;
+                height: 24px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 2px solid rgba(102, 126, 234, 0.3);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 10px;
+                font-size: 12px;
                 color: #667eea;
                 cursor: grab;
-                opacity: 0;
-                transform: scale(0.8);
-                transition: all 0.2s;
+                opacity: 0.3;
+                transform: scale(0.9);
+                transition: all 0.3s ease;
                 font-weight: bold;
                 letter-spacing: -1px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                z-index: 10;
             }
 
             .tts-floating-btn:hover .tts-drag-handle {
                 opacity: 1;
                 transform: scale(1);
+                background: white;
+                border-color: #667eea;
             }
 
             .tts-drag-handle:hover {
-                background: white;
+                background: white !important;
                 cursor: grab;
+                transform: scale(1.1) !important;
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
             }
 
             .tts-drag-handle:active {
                 cursor: grabbing;
+                transform: scale(1.05) !important;
+            }
+
+            /* Always show drag handle on mobile */
+            @media (max-width: 768px) {
+                .tts-drag-handle {
+                    opacity: 0.6;
+                }
             }
 
             .tts-icon {
@@ -1037,4 +1051,13 @@ window.addEventListener('hashchange', function() {
     if (window.mdBookTTS) {
         window.mdBookTTS.stopReading();
     }
+});
+
+// Create show button if TTS is hidden on page load
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        if (window.mdBookTTS && window.mdBookTTS.settings.hidden) {
+            window.mdBookTTS.createShowButton();
+        }
+    }, 500);
 });
