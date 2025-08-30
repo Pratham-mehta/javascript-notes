@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Premium Text-to-Speech for mdBook
 // Beautiful UI with working settings and smart voice selection
 
@@ -8,13 +9,18 @@ class mdBookTTS {
         this.isPlaying = false;
         this.isPaused = false;
         this.voices = [];
+        this.isDragging = false;
+        this.dragOffset = { x: 0, y: 0 };
         this.settings = {
             rate: 1.0,
             pitch: 1.0,
             volume: 0.8,
-            voice: null
+            voice: null,
+            position: { x: 20, y: 20 }, // Default position from right and top
+            hidden: false
         };
         
+        this.loadSettings();
         this.init();
     }
 
@@ -51,6 +57,145 @@ class mdBookTTS {
         }
     }
 
+    setupDragListeners(container, dragHandle, floatingBtn) {
+        let startX, startY, initialX, initialY;
+
+        const startDrag = (e) => {
+            this.isDragging = false; // Reset dragging state
+            
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            
+            startX = clientX;
+            startY = clientY;
+            
+            const rect = container.getBoundingClientRect();
+            initialX = rect.left;
+            initialY = rect.top;
+
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', onDrag, { passive: false });
+            document.addEventListener('touchend', endDrag);
+            
+            floatingBtn.classList.add('dragging');
+            e.preventDefault();
+        };
+
+        const onDrag = (e) => {
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+            
+            const deltaX = clientX - startX;
+            const deltaY = clientY - startY;
+            
+            // Mark as dragging if moved more than 5px
+            if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+                this.isDragging = true;
+            }
+
+            if (this.isDragging) {
+                const newX = initialX + deltaX;
+                const newY = initialY + deltaY;
+
+                // Constrain to viewport
+                const maxX = window.innerWidth - 56;
+                const maxY = window.innerHeight - 56;
+                
+                const constrainedX = Math.max(0, Math.min(newX, maxX));
+                const constrainedY = Math.max(0, Math.min(newY, maxY));
+
+                container.style.left = `${constrainedX}px`;
+                container.style.top = `${constrainedY}px`;
+                container.style.right = 'auto';
+                
+                e.preventDefault();
+            }
+        };
+
+        const endDrag = () => {
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', onDrag);
+            document.removeEventListener('touchend', endDrag);
+            
+            floatingBtn.classList.remove('dragging');
+
+            if (this.isDragging) {
+                // Save new position
+                const rect = container.getBoundingClientRect();
+                this.settings.position.x = window.innerWidth - rect.right;
+                this.settings.position.y = rect.top;
+                this.saveSettings();
+                
+                // Reset dragging state after a short delay to prevent click
+                setTimeout(() => {
+                    this.isDragging = false;
+                }, 100);
+            }
+        };
+
+        // Add drag listeners
+        dragHandle.addEventListener('mousedown', startDrag);
+        dragHandle.addEventListener('touchstart', startDrag, { passive: false });
+    }
+
+    hideTTSButton() {
+        const container = document.querySelector('.tts-container');
+        container.style.display = 'none';
+        this.settings.hidden = true;
+        this.saveSettings();
+        this.hidePanel();
+        this.createShowButton();
+    }
+
+    createShowButton() {
+        // Remove existing show button
+        const existingBtn = document.querySelector('.tts-show-btn');
+        if (existingBtn) existingBtn.remove();
+
+        // Create show button
+        const showBtn = document.createElement('button');
+        showBtn.className = 'tts-show-btn';
+        showBtn.innerHTML = '🎧';
+        showBtn.title = 'Show TTS Controls';
+        
+        showBtn.addEventListener('click', () => {
+            this.showTTSButton();
+            showBtn.remove();
+        });
+
+        document.body.appendChild(showBtn);
+    }
+
+    showTTSButton() {
+        const container = document.querySelector('.tts-container');
+        container.style.display = 'block';
+        this.settings.hidden = false;
+        this.saveSettings();
+    }
+
+    saveSettings() {
+        try {
+            localStorage.setItem('mdbook-tts-settings', JSON.stringify(this.settings));
+        } catch (e) {
+            // Handle localStorage not available
+            console.log('Could not save TTS settings');
+        }
+    }
+
+    loadSettings() {
+        try {
+            const saved = localStorage.getItem('mdbook-tts-settings');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                this.settings = { ...this.settings, ...parsed };
+            }
+        } catch (e) {
+            // Handle localStorage not available or invalid JSON
+            console.log('Could not load TTS settings');
+        }
+
     createTTSInterface() {
         const content = document.querySelector('.content main') || document.querySelector('.content');
         if (!content) return;
@@ -62,6 +207,10 @@ class mdBookTTS {
         // Create floating TTS button
         const ttsContainer = document.createElement('div');
         ttsContainer.className = 'tts-container';
+        ttsContainer.style.right = `${this.settings.position.x}px`;
+        ttsContainer.style.top = `${this.settings.position.y}px`;
+        ttsContainer.style.display = this.settings.hidden ? 'none' : 'block';
+        
         ttsContainer.innerHTML = `
             <div class="tts-floating-btn" id="tts-main-btn">
                 <svg class="tts-icon play-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -71,12 +220,16 @@ class mdBookTTS {
                     <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
                 </svg>
                 <div class="tts-pulse-ring"></div>
+                <div class="tts-drag-handle" title="Drag to move">⋮⋮</div>
             </div>
             
             <div class="tts-panel" id="tts-panel" style="display: none;">
                 <div class="tts-panel-header">
                     <h3>🎧 Listen to this page</h3>
-                    <button class="tts-close-btn">&times;</button>
+                    <div class="tts-header-controls">
+                        <button class="tts-hide-btn" title="Hide TTS Button">👁️</button>
+                        <button class="tts-close-btn">&times;</button>
+                    </div>
                 </div>
                 
                 <div class="tts-controls-section">
@@ -169,10 +322,9 @@ class mdBookTTS {
         style.textContent = `
             .tts-container {
                 position: fixed;
-                top: 20px;
-                right: 20px;
                 z-index: 1000;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+                user-select: none;
             }
 
             .tts-floating-btn {
@@ -188,6 +340,12 @@ class mdBookTTS {
                 box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 overflow: hidden;
+            }
+
+            .tts-floating-btn.dragging {
+                cursor: grabbing;
+                transform: scale(1.1);
+                box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
             }
 
             .tts-floating-btn:hover {
@@ -224,6 +382,41 @@ class mdBookTTS {
                 100% { transform: scale(1.8); opacity: 0; }
             }
 
+            .tts-drag-handle {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+                width: 20px;
+                height: 20px;
+                background: rgba(255, 255, 255, 0.9);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+                color: #667eea;
+                cursor: grab;
+                opacity: 0;
+                transform: scale(0.8);
+                transition: all 0.2s;
+                font-weight: bold;
+                letter-spacing: -1px;
+            }
+
+            .tts-floating-btn:hover .tts-drag-handle {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            .tts-drag-handle:hover {
+                background: white;
+                cursor: grab;
+            }
+
+            .tts-drag-handle:active {
+                cursor: grabbing;
+            }
+
             .tts-icon {
                 width: 24px;
                 height: 24px;
@@ -231,19 +424,55 @@ class mdBookTTS {
                 transition: opacity 0.2s;
             }
 
-            .tts-panel {
-                position: absolute;
-                top: 70px;
-                right: 0;
-                width: 320px;
-                background: white;
-                border-radius: 16px;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-                overflow: hidden;
-                transform: translateY(-10px) scale(0.95);
-                opacity: 0;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                border: 1px solid rgba(0, 0, 0, 0.05);
+            .tts-header-controls {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+
+            .tts-hide-btn, .tts-close-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 18px;
+                cursor: pointer;
+                padding: 4px;
+                width: 28px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background-color 0.2s;
+            }
+
+            .tts-hide-btn:hover, .tts-close-btn:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .tts-show-btn {
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                width: 48px;
+                height: 48px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
+                border-radius: 50%;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+                transition: all 0.3s;
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .tts-show-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
             }
 
             .tts-panel.show {
@@ -266,24 +495,19 @@ class mdBookTTS {
                 font-weight: 600;
             }
 
-            .tts-close-btn {
-                background: none;
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                padding: 0;
-                width: 24px;
-                height: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: background-color 0.2s;
-            }
-
-            .tts-close-btn:hover {
-                background-color: rgba(255, 255, 255, 0.2);
+            .tts-panel {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 320px;
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                overflow: hidden;
+                transform: translateY(-10px) scale(0.95);
+                opacity: 0;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border: 1px solid rgba(0, 0, 0, 0.05);
             }
 
             .tts-controls-section {
@@ -497,13 +721,17 @@ class mdBookTTS {
 
             @media (max-width: 480px) {
                 .tts-container {
-                    top: 10px;
-                    right: 10px;
+                    /* Mobile positioning will be handled by JavaScript */
                 }
 
                 .tts-panel {
                     width: calc(100vw - 40px);
                     right: -10px;
+                }
+
+                .tts-show-btn {
+                    bottom: 10px;
+                    left: 10px;
                 }
             }
         `;
@@ -516,9 +744,12 @@ class mdBookTTS {
     }
 
     setupEventListeners() {
+        const container = document.querySelector('.tts-container');
         const floatingBtn = document.getElementById('tts-main-btn');
+        const dragHandle = document.querySelector('.tts-drag-handle');
         const panel = document.getElementById('tts-panel');
         const closeBtn = document.querySelector('.tts-close-btn');
+        const hideBtn = document.querySelector('.tts-hide-btn');
         const playBtn = document.getElementById('tts-play-btn');
         const stopBtn = document.getElementById('tts-stop-btn');
         const voiceSelect = document.getElementById('tts-voice-select');
@@ -526,14 +757,25 @@ class mdBookTTS {
         const volumeSlider = document.getElementById('tts-volume');
         const pitchSlider = document.getElementById('tts-pitch');
 
+        // Drag functionality
+        this.setupDragListeners(container, dragHandle, floatingBtn);
+
         // Floating button click
         floatingBtn.addEventListener('click', (e) => {
             e.stopPropagation();
+            if (this.isDragging) return; // Don't trigger click if we were dragging
+            
             if (this.isPlaying) {
                 this.togglePlayPause();
             } else {
                 this.togglePanel();
             }
+        });
+
+        // Hide button
+        hideBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.hideTTSButton();
         });
 
         // Close panel
@@ -565,21 +807,25 @@ class mdBookTTS {
         voiceSelect.addEventListener('change', (e) => {
             const selectedIndex = parseInt(e.target.value);
             this.settings.voice = this.voices[selectedIndex];
+            this.saveSettings();
         });
 
         rateSlider.addEventListener('input', (e) => {
             this.settings.rate = parseFloat(e.target.value);
             document.getElementById('tts-rate-display').textContent = `${this.settings.rate}x`;
+            this.saveSettings();
         });
 
         volumeSlider.addEventListener('input', (e) => {
             this.settings.volume = parseFloat(e.target.value);
             document.getElementById('tts-volume-display').textContent = `${Math.round(this.settings.volume * 100)}%`;
+            this.saveSettings();
         });
 
         pitchSlider.addEventListener('input', (e) => {
             this.settings.pitch = parseFloat(e.target.value);
             document.getElementById('tts-pitch-display').textContent = this.settings.pitch.toFixed(1);
+            this.saveSettings();
         });
     }
 
