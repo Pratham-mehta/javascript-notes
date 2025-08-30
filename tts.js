@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Premium Text-to-Speech for mdBook
 // Beautiful UI with working settings and smart voice selection
 
@@ -15,7 +16,7 @@ class mdBookTTS {
             pitch: 1.0,
             volume: 0.8,
             voice: null,
-            position: { x: 20, y: 20 }, // Default position from right and top
+            position: { x: 20, y: 20 },
             hidden: false
         };
         
