@@ -1,4 +1,96 @@
 # JavaScript Notes
 
-Index:
-1. Introduction
+## Index
+1. Getting Started:
+   - [What is JavaScript?](./getting-started/whatisjs.md)
+   - [Setting up the Environment](./getting-started/setupenv.md)
+   - [JavaScript in Browsers](./getting-started/jsinbrow.md)
+   - [Separation of Concerns ](./getting-started/separationofconcerns.md)
+   - [JavaScript in Node ](./getting-started/jsinnode.md)
+
+2. Basics
+   - [Variables](./basics/variables.md)
+   - [Constants](./basics/constants.md)
+   - [Primitive Types](./basics/primitive.md)
+   - [Dynamic Typing](./basics/dynamic.md)
+   - [Objects](./basics/objects.md)
+   - [Arrays](./basics/arrays.md)
+   - [Functions](./basics/functions.md)
+
+3. Operators
+   - [JavaScript Operators](./operators/jsoperators.md)
+   - [Arithmetic Operators](./operators/arithmetic.md)
+   - [Assignment Operators](./operators/assignment.md)
+   - [Comparision Operators](./operators/comp.md)
+   - [Equality Operators](./operators/eqaultity.md)
+   - [Ternary Operators](./operators/ternary.md)
+   - [Logical Operators ](./operators/logical.md)
+   - [Logical Operators with Non-booleans](./operators/logicalwithnonboolean.md)
+   - [Bitwise Operators](./operators/bitwise.md)
+   - [Access Control Systems using Bitwise Operators](./operators/accesscontrol.md)
+   - [Operator Precedence](./operators/operatorprece.md)
+   - [Quiz & Exercises](./operators/quiz.md)
+   - [Programming Exercise ](./operators/programexercise.md)
+
+4. Control Flow
+   - [If...Else](./controlflow/ifelse.md)
+   - [Switch...case]()
+   - [For]()
+   - [While]()
+   - [Do...While]()
+   - [Infinite Loops]()
+   - [For...In]()
+   - [For...of]()
+   - [Break and Continue]()
+   - [Max of Two numbers]()
+   - [Exercises]()
+
+5. Objects
+   - [Basics]()
+   - [Factory Functions]()
+   - [Constructor Functions]()
+   - [Dynamic Nature of Objects]()
+   - [ Constructor Property]()
+   - [Functions are Objects]()
+   - [Value vs. Reference Types]()
+   - [Enumerating Properties of an Object]()
+   - [Cloning an Object]()
+   - [Garbage Collection]()
+   - [Math]()
+   - [String]()
+   - [Template Literals]()
+   - [Date]()
+   - [Exercises]()
+
+6. Arrays
+   - [Introduction]()
+   - [Adding Elements]()
+   - [Finding Elements (Primitives) ]()
+   - [Finding Elements (Reference Types)]()
+   - [Arrow Functions]()
+   - [Removing Elements]()
+   - [Emptying an Array]()
+   - [Combining and Slicing Arrays]()
+   - [The Spread Operator]()
+   - [Iterating an Array]()
+   - [Joining an Array]()
+   - [Sorting an Array]()
+   - [Testing the elements of an Array]()
+   - [Flitering an Array]()
+   - [Mapping an Array]()
+   - [Reducing an Array]()
+   - [Exercises]()
+
+7. Functions
+   - [Function Declaration vs. Expressions]()
+   - [Hoisting]()
+   - [Arguments]()
+   - [The Rest Operator]()
+   - [Default Parameters]()
+   - [Getters and Setters]()
+   - [Try and Catch]()
+   - [Local vs Global Scope]()
+   - [Let vs Var]()
+   - [The this keyword]()
+   - [Changing this ]()
+   - [Exercises]()
