@@ -95,3 +95,118 @@ Now what if I want to change the name of this person (object), see the upcoming 
 - **Accessing Properties**: Prefer dot notation for simplicity; use bracket notation for dynamic property access.
 
 In the next lecture, we will explore arrays and functions, which are also part of the reference types in JavaScript.
+
+<u>**Only read this section below if you are coding in Python as well and have time for pleasure read to understand the difference**</u>
+
+> ### Python Dictionaries vs JavaScript Objects
+> 
+> Think of both JavaScript objects and Python dictionaries like boxes where you store things with labels. They're pretty similar, but each language has its own style.
+> 
+> **JavaScript Objects - The Flexible Friend**
+> 
+> In JavaScript, you create them like this:
+> ```javascript
+> let person = {
+>   name: "Sarah",
+>   age: 25,
+>   city: "New York"
+> }
+> ```
+> 
+> The cool thing about JavaScript objects is you can grab values in two ways:
+> - `person.name` (the dot way - simple and clean)
+> - `person["name"]` (the bracket way - useful for tricky names)
+> 
+> **Python Dictionaries - The Consistent Companion**
+> 
+> Python does it like this:
+> ```python
+> person = {
+>   "name": "Sarah",
+>   "age": 25,
+>   "city": "New York"
+> }
+> ```
+> 
+> With Python, you only have one way to get values:
+> - `person["name"]` (always brackets, no exceptions)
+> 
+> **The Big Differences**
+> 
+> **Keys (the labels on your boxes):**
+> - JavaScript is picky - only text labels allowed
+> - Python is generous - you can use text, numbers, even more complex things as labels (you will understand the difference down below with an example illustrated)
+> 
+> **Getting your stuff out:**
+> - JavaScript: Two ways (dot or brackets)
+> - Python: One way (just brackets)
+>
+>Over here you will understand the difference for the **keys (labels)**
+> **JavaScript - The Picky One**
+> 
+> In JavaScript, even if you try to use numbers as keys, they secretly get turned into text:
+> 
+> ```javascript
+> let jsObject = {
+>   1: "first",
+>   2: "second",
+>   "hello": "world"
+> }
+> 
+> console.log(typeof Object.keys(jsObject)[0])  // "string" - not a number!
+> // JavaScript converted that 1 into "1" behind the scenes
+> ```
+> 
+> **Python - The Generous One**
+> 
+> Python lets you use all sorts of things as keys:
+> 
+> ```python
+> # Numbers as keys? Sure!
+> my_dict = {
+>     1: "first",
+>     2: "second",
+>     3.14: "pi"
+> }
+> 
+> # Mix of different types? No problem!
+> mixed_dict = {
+>     "name": "Alice",           # string key
+>     42: "answer",              # number key
+>     (1, 2): "coordinates",     # tuple key
+>     True: "boolean key"        # boolean key
+> }
+> 
+> # You can even use tuples for complex keys
+> student_grades = {
+>     ("John", "Math"): 95,
+>     ("John", "Science"): 87,
+>     ("Mary", "Math"): 92
+> }
+> ```
+> 
+> **The Real Difference in Action**
+> 
+> Let's say you want to track scores by player number:
+> 
+> ```javascript
+> // JavaScript - numbers become strings automatically
+> let scores = {
+>   1: 100,
+>   2: 85
+> }
+> console.log(scores[1])    // Works: 100
+> console.log(scores["1"])  // Also works: 100 (same thing!)
+> ```
+> 
+> ```python
+> # Python - numbers stay as numbers
+> scores = {
+>     1: 100,      # integer key
+>     "1": 85      # string key - totally different!
+> }
+> print(scores[1])    # 100
+> print(scores["1"])  # 85 - these are completely different keys!
+> ```
+> 
+> See the difference? JavaScript treats `1` and `"1"` as the same key, but Python sees them as completely different keys. That's what I meant by Python being more generous - it gives you more control over exactly what type of key you want to use!
