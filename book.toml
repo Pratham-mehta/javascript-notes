@@ -7,8 +7,3 @@ src = "src"
 
 [build]
 build-dir = "book"
-
-[preprocessor.tts]
-
-[output.html]
-additional-js = ["tts.js"]
