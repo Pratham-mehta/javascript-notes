@@ -45,7 +45,8 @@
 - [For...In](./controlflow/forinloop.md)
 - [For...of](./controlflow/forofloop.md)
 - [Break and Continue](./controlflow/breakandcontinue.md)
-- [Exercises]()
+- [Exercises 1-5](./controlflow/exeoneto5.md)
+- [Exercises 6-10]()
 
 # Objects
 - [Basics]()
