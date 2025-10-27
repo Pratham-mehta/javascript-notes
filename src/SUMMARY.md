@@ -37,15 +37,14 @@
 
 # Control Flow
 - [If...Else](./controlflow/ifelse.md)
-- [Switch...case]()
-- [For]()
-- [While]()
-- [Do...While]()
-- [Infinite Loops]()
-- [For...In]()
-- [For...of]()
-- [Break and Continue]()
-- [Max of Two numbers]()
+- [Switch...case](./controlflow/switchcase.md)
+- [For](./controlflow/forloops.md)
+- [While](./controlflow/whileloop.md)
+- [Do...While](./controlflow/dowhile.md)
+- [Infinite Loops](./controlflow/infiniteloops.md)
+- [For...In](./controlflow/forinloop.md)
+- [For...of](./controlflow/forofloop.md)
+- [Break and Continue](./controlflow/breakandcontinue.md)
 - [Exercises]()
 
 # Objects
