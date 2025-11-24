@@ -496,7 +496,7 @@ Now we get `NaN`.
 
 ---
 
-## Exercise 2: `checkSpeed` Function
+## Exercise 4: `checkSpeed` Function
 
 Alright, here's another exercise, but this exercise is a little more complicated than the earlier exercises.
 
@@ -536,7 +536,7 @@ Alright, here's another exercise, but this exercise is a little more complicated
 
 > **Pause and Try:** I want you to spend 15-20 minutes to do this exercise. Once you're done, come back and see the solution.
 
-### Instructor's Solution and Walkthrough
+## Solution 4
 
 Alright, now let's see how I solved this problem.
 
@@ -761,7 +761,7 @@ When we call this function and pass a number (e.g., 10), it should display all t
 
 > **Student Pause Point:** It's a fairly easy exercise. Pause the video, spend a few minutes, and when you're done, come back and see the solution.
 
-### Solution 1: Using `if/else`
+### Solution 5.1: Using `if/else`
 
 1. First, we need a `for` loop. We set our `i` variable to 0.
 
@@ -787,7 +787,7 @@ function showNumbers(limit) {
 }
 ```
 
-### Solution 2: Code Optimization (Using Conditional Operator)
+### Solution 5.2: Code Optimization (Using Conditional Operator)
 
 There is another way to write this program. Instead of having two separate `console.log` statements, we can do something like this:
 
