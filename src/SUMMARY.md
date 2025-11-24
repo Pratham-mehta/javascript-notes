@@ -47,7 +47,12 @@
 - [For...of](./controlflow/forofloop.md)
 - [Break and Continue](./controlflow/breakandcontinue.md)
 - [Exercises 1-5](./controlflow/exeoneto5.md)
-- [Exercises 6-10]()
+- [Exercise 6](./controlflow/Exercise%206:%20Count%20Truthy%20Values.md)
+- [Exercise 7](./controlflow/Exercise%207%20:%20Show%20Properties.md)
+- [Exercise 8](./controlflow/Exercise%208:%20Sum%20of%20Multiples%20of%203%20and%205.md)
+- [Exercise 9](./controlflow/Exercise%209%20:%20Grade%20Calculator.md)
+- [Exercise 10](./controlflow/Exercise%2010%20:%20Show%20Stars.md)
+- [Prime vs Composite Numbers](./controlflow/PrimevsCompositeNumbers.md)
 
 # Objects
 - [Basics]()
