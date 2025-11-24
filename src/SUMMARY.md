@@ -16,6 +16,7 @@
 - [Constants](./basics/constants.md)
 - [Primitive Types](./basics/primitive.md)
 - [Dynamic Typing](./basics/dynamic.md)
+- [Type Conversions](./basics/Type%20Conversion%20in%20JavaScript.md)
 - [Objects](./basics/objects.md)
 - [Arrays](./basics/arrays.md)
 - [Functions](./basics/functions.md)
