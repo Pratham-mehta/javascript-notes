@@ -96,6 +96,9 @@ Now what if I want to change the name of this person (object), see the upcoming 
 
 In the next lecture, we will explore arrays and functions, which are also part of the reference types in JavaScript.
 
+## IMPORTANT TO NOTE:
+![alt text](image.png)
+
 <u>**Only read this section below if you are coding in Python as well and have time for pleasure read to understand the difference**</u>
 
 > ### Python Dictionaries vs JavaScript Objects
